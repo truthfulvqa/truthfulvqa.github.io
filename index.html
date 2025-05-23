@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" name="description" />
+  <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" property="og:title" />
+  <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" property="og:description" />
+  <meta content="https://truthfulvqa.github.io/static/images/open_graph.png" property="og:image" />
+  <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" property="twitter:title" />
+  <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" property="twitter:description" />
+  <meta content="https://truthfulvqa.github.io/static/images/open_graph.png" property="twitter:image" />
+  <meta property="og:type" content="website" />
+  <meta content="summary_large_image" name="twitter:card" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="static/images/apple-touch-icon.png">
+
+  <title>TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9Z7HCWJNBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9Z7HCWJNBC');
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Asap:wght@700&family=Source+Sans+3:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Asap:wght@700&family=Source+Sans+3:wght@400;700&display=swap">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Styles -->
+  <link href="static/css/style.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .section {
+      margin-top: 0;
+      padding-top: 0;
+    }
+    .title-section {
+      background-color: #0d47a1;
+      padding: 5rem 0 3rem 0;
+      margin-bottom: 2rem;
+      color: white;
+      text-align: center;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+    .title {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+      color: white;
+    }
+    .link-button {
+      background-color: #000000;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+      margin: 0 10px;
+    }
+    .link-button:hover {
+      opacity: 0.8;
+    }
+    .link-button i {
+      margin-right: 8px;
+    }
+    .link-button .fa-github {
+      font-size: 1.1em;
+      vertical-align: -0.1em;
+    }
+    .author-text {
+      color: white;
+    }
+    .button-row {
+      margin-top: 2rem;
+    }
+
+    /* 新增的leaderboard样式 */
+    .leaderboard-container {
+      margin: 2rem 0;
+      overflow-x: auto;
+      background: transparent;
+    }
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      background: transparent;
+      box-shadow: none;
+    }
+    .leaderboard-table th {
+      background-color: #0d47a1;
+      color: white;
+      font-weight: 600;
+      padding: 15px 8px;
+      text-align: center;
+      border-bottom: none;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+    .leaderboard-table th:first-child {
+      border-top-left-radius: 8px;
+    }
+    .leaderboard-table th:last-child {
+      border-top-right-radius: 8px;
+    }
+    .leaderboard-table td {
+      padding: 12px 8px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      transition: background-color 0.2s;
+    }
+    .leaderboard-table tr:hover td {
+      background-color: rgba(0,0,0,0.02);
+    }
+    .leaderboard-table td:first-child {
+      font-weight: 600;
+      color: #666;
+    }
+    .leaderboard-table td:nth-child(2) {
+      text-align: left;
+      font-weight: 500;
+      color: #0d47a1;
+    }
+    .leaderboard-table .highlight {
+      background-color: #e8f5e9;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+    .leaderboard-table tr:nth-child(1) td.highlight {
+      background-color: #c8e6c9;
+      color: #1b5e20;
+    }
+    .category-specs {
+      margin-top: 2rem;
+      padding: 1.5rem 0;
+      background-color: transparent;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .category-item h4 {
+      color: #0d47a1;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    .category-item ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .category-item li {
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+    .category-item strong {
+      color: #333;
+      margin-right: 0.5rem;
+    }
+    .leaderboard-note {
+      margin-top: 1.5rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .leaderboard-note a {
+      color: #0d47a1;
+      text-decoration: none;
+    }
+    .leaderboard-note a:hover {
+      text-decoration: underline;
+    }
+
+    /* 添加新的样式 */
+    .section-header {
+      text-align: center;
+      font-size: 2.5rem;
+      margin: 3rem 0 2rem;
+      color: #333;
+      font-variant: small-caps;
+      letter-spacing: 1px;
+      font-weight: 600;
+      background-color: #f5f5f5;
+      padding: 1.5rem 0;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .paragraph p {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .paragraph p:has(b) {
+      margin-top: 2.5rem;
+      font-size: 1.2rem;
+    }
+    .paragraph ul {
+      margin-left: 2rem;
+      margin-bottom: 2rem;
+    }
+    .paragraph ul li {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .header-gif {
+      height: 2.5rem;
+      vertical-align: middle;
+      margin: 0 1rem;
+    }
+    .case-gif-container {
+      width: 100%;
+      margin: 3rem 0;
+      text-align: center;
+    }
+    .case-gif {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .pipeline-gif-container {
+      width: 100%;
+      margin: 3rem 0;
+      text-align: center;
+    }
+    .pipeline-gif {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .two-column-container {
+      display: flex;
+      gap: 2rem;
+      margin: 2rem 0;
+      align-items: center;
+    }
+    .text-column {
+      flex: 1;
+      padding-right: 2rem;
+      max-width: 800px;
+      margin: 0 auto 4rem;
+    }
+    .gif-column {
+      flex: 1;
+    }
+    .dataset-gif {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .dataset-gif-container {
+      width: 100%;
+      margin: 4rem 0;
+      text-align: center;
+    }
+    .category-section {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .category-card {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .category-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .category-section h3 {
+      color: #0d47a1;
+      margin: 0 0 0.8rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e9ecef;
+    }
+    .category-section ul {
+      list-style-type: none;
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+    .category-section li {
+      position: relative;
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+    .category-section li:before {
+      content: "•";
+      color: #0d47a1;
+      position: absolute;
+      left: -1.2rem;
+    }
+    @media (max-width: 1024px) {
+      .category-section {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .category-section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="section">
+    <div class="container">
+      <div class="title-section">
+        <div class="title-row">
+          <h1 class="title">The Mirage of Multimodality:<br>Where Truth is Tested and Honesty Unravels</h1>
+        </div>
+        <div class="row">
+          <div class="author-col">
+            <a href="#" class="author-text">Anonymous Authors</a>
+          </div>
+        </div>
+
+        <div class="row button-row">
+          <a class="link-button" href="#" target="_blank"><i class="fas fa-file-pdf"></i>Paper</a>
+          <a class="link-button" href="https://github.com/truthfulvqa/TruthfulVQA_code" target="_blank"><i class="fab fa-github"></i>Code</a>
+          <a class="link-button" href="https://github.com/truthfulvqa/TruthfulVQA_dataset" target="_blank"><i class="fas fa-database"></i>Data</a>
+        </div>
+      </div>
+
+      <p class="tldr">
+        <b>TL;DR</b>:
+        We introduce TruthfulVQA, the first large-scale multimodal truthfulness benchmark built with rigorous human-in-the-loop verification, with which we evaluate the truthfulness of large language models (LLMs) in answering visual questions.
+      </p>
+
+      <div id="content">
+        <div class="pipeline-gif-container">
+          <img src="static/images/case.gif" alt="Pipeline animation" class="pipeline-gif">
+        </div>
+
+        <h2 class="section-header" id="overview">Overview</h2>
+        <div class="paragraph">
+          <p>
+            Reasoning models have recently attracted significant attention, especially for tasks that involve complex inference. Their strengths exemplify the <i>System II</i> paradigm (slow, structured thinking), contrasting with the <i>System I</i> (rapid, heuristic-driven). Yet, <i><b>does slower reasoning necessarily lead to greater truthfulness?</b></i>
+            Our findings suggest otherwise. In this study, we present the first systematic investigation of distortions associated with System I and System II reasoning in multimodal contexts. We demonstrate that slower reasoning models, when presented with incomplete or misleading visual inputs, are more likely to fabricate plausible yet false details to support flawed reasoning -- a phenomenon we term the <b>Mirage of Multimodality</b>. To examine this, we constructed a 5,000-sample hierarchical prompt dataset annotated by over 60 human participants. These prompts gradually increase in complexity, revealing a consistent pattern: slower reasoning models tend to employ <b>depth-first thinking</b> (delving deeper into incorrect premises), whereas faster chat models favor <b>breadth-first inference</b>, exhibiting greater caution under uncertainty. Our results highlight a critical vulnerability of slower reasoning models: although highly effective in structured domains such as mathematics, it becomes brittle when confronted with ambiguous multimodal inputs.
+          </p>
+          <p><b>Contributions:</b></p>
+          <ul>
+            <li> <b>First and foremost, human-in-the-loop: </b> We introduce TruthfulVQA, the first large-scale multimodal truthfulness benchmark built with rigorous human-in-the-loop verification. Over 5k visually misleading images were collected and annotated by 50 professional annotators, and, critically, each sample was independently reviewed by five professional annotators on a case-by-case basis, ensuring evaluation robustness beyond automated metrics.
+            </li>
+            <li>
+                <b>Hierarchical prompt design for deep truthfulness evaluation: </b> We propose a three-tier human-written prompt that systematically probes models across increasing levels of reasoning complexity, enabling finer-grained diagnosis of hallucination and misinformation vulnerabilities in MLLMs.
+            </li>
+            <li>
+                <b>Revealing slow <i>vs.</i> fast thinking pitfalls in multimodal reasoning: </b> We conduct the first comprehensive analysis comparing depth-first (slow thinking) reasoning models and breadth-first (fast thinking) chat models under adversarial visual conditions. Our findings show that reasoning models, despite their strengths in math and code, are significantly more prone to factual hallucinations in complex visual tasks.
+            </li>
+            <li>
+                <b>TruthfulJudge: Reliable Human-Centric Evaluation Pipeline: </b> We design TruthfulJudge, a reliable evaluation pipeline to mitigate the pitfalls of AI-as-judge setups. Our methodology emphasizes in-depth human involvement to prevent feedback loops of hallucinated errors, ensuring faithful assessment of multimodal model truthfulness. Our specialised judge model, TruthfulJudge, is well-calibrated (ECE=0.11), self-consistent, and highly inter-annotator agreed (Cohen's &kappa; = 0.79), achieving 88.4% judge accuracy.
+            </li>
+          </ul>
+        </div>
+
+        <h2 class="section-header" id="dataset">Dataset</h2>
+        <div class="text-column">
+          <h3>Dataset Composition</h3>
+          <p>
+            Each entry of TruthfulVQA undergoes rigorous multi-stage quality assurance, verified by at least five independent annotators. The dataset construction involves the following core components:
+          </p>
+          <ul>
+            <li>
+              <strong>Human Annotation and Quality Assurance Team</strong>
+              <br>
+              We collaborated with a professional annotation team of 50 members, implementing a multi-stage quality assurance protocol to ensure data quality and consistency.
+            </li>
+            <li>
+              <strong>Human-crafted Images from Webpages</strong>
+              <br>
+              The dataset includes 5,000 web-sourced images: 4,500 manually curated to contain misleading or factually incorrect content, and 500 generated by image-generation models. Each image was accepted only after independent confirmation by five annotators.
+            </li>
+            <li>
+              <strong>Hierarchical Prompts Evaluation</strong>
+              <br>
+              Each image is paired with three levels of prompts (Level 1, 2, and 3), designed to offer increasing informational depth and containing ambiguous, deceptive, or subtly manipulated content. This structure enables fine-grained evaluation of a model's ability to resist hallucination and maintain factual accuracy.
+            </li>
+          </ul>
+        </div>
+
+        <div class="dataset-gif-container">
+          <img src="static/images/pipeline.gif" alt="Dataset visualization" class="dataset-gif">
+        </div>
+
+        <div class="category-section">
+          <div class="category-card">
+            <h3>S1. Eye Illusion</h3>
+            <ul>
+              <li>Perceptual Multiplicity</li>
+              <li>Optical Illusions</li>
+            </ul>
+          </div>
+
+          <div class="category-card">
+            <h3>S2. Perspective Restriction</h3>
+            <ul>
+              <li>Cropped or Partial Observation</li>
+              <li>Unconventional Shooting Angles</li>
+              <li>Shape Distortion Caused by Natural Phenomena</li>
+            </ul>
+          </div>
+
+          <div class="category-card">
+            <h3>S3. Contextual Bias</h3>
+            <ul>
+              <li>Background Interference</li>
+              <li>Manipulation of Emotional Atmosphere</li>
+            </ul>
+          </div>
+
+          <div class="category-card">
+            <h3>S4. Information Hiding</h3>
+            <ul>
+              <li>Visual Information Distortion</li>
+              <li>Blurring / Low-Resolution Processing</li>
+              <li>Concealed Features and Information Masking</li>
+            </ul>
+          </div>
+
+          <div class="category-card">
+            <h3>S5. Feature Forgery</h3>
+            <ul>
+              <li>Physical Feature Manipulation</li>
+              <li>Natural Feature Confusion</li>
+              <li>Insertion of Fake Objects or Elements</li>
+            </ul>
+          </div>
+
+          <div class="category-card">
+            <h3>S6. Fictional Information</h3>
+            <ul>
+              <li>Fabricated Flags and Maps</li>
+              <li>Imaginary Species</li>
+            </ul>
+          </div>
+
+          <div class="category-card">
+            <h3>S7. Imitative Falsehood</h3>
+            <ul>
+              <li>Misapplied Reasoning Transfer</li>
+              <li>Reinforcement of Semantic Bias</li>
+              <li>Inheritance of False Information</li>
+            </ul>
+          </div>
+
+          <div class="category-card">
+            <h3>S8. Information Forgery</h3>
+            <ul>
+              <li>Factual Fabrication</li>
+              <li>Image Manipulation</li>
+              <li>False Reasoning</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="section-header" id="leaderboard">Leaderboard</h2>
+        <div class="leaderboard-container">
+          <div class="table-container">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>MLLMs</th>
+                  <th>Overall</th>
+                  <th>CAI</th>
+                  <th>L1</th>
+                  <th>L2</th>
+                  <th>L3</th>
+                  <th>S1</th>
+                  <th>S2</th>
+                  <th>S3</th>
+                  <th>S4</th>
+                  <th>S5</th>
+                  <th>S6</th>
+                  <th>S7</th>
+                  <th>S8</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>InternVL-2.5-38B</td>
+                  <td class="highlight">77.97%</td>
+                  <td>0.2552</td>
+                  <td>91.18%</td>
+                  <td>76.48%</td>
+                  <td>70.96%</td>
+                  <td>81.06%</td>
+                  <td>85.80%</td>
+                  <td class="highlight">79.22%</td>
+                  <td class="highlight">70.08%</td>
+                  <td class="highlight">85.69%</td>
+                  <td>81.75%</td>
+                  <td>80.22%</td>
+                  <td>71.52%</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Qwen2.5-VL-72B</td>
+                  <td>77.33%</td>
+                  <td>0.2537</td>
+                  <td>88.24%</td>
+                  <td class="highlight">76.48%</td>
+                  <td>67.27%</td>
+                  <td>79.59%</td>
+                  <td>84.59%</td>
+                  <td>77.68%</td>
+                  <td>69.96%</td>
+                  <td>83.53%</td>
+                  <td>79.91%</td>
+                  <td>74.23%</td>
+                  <td>69.25%</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>InternVL-2.5-78B</td>
+                  <td>76.48%</td>
+                  <td>0.3129</td>
+                  <td>91.16%</td>
+                  <td>73.70%</td>
+                  <td>64.75%</td>
+                  <td>79.43%</td>
+                  <td class="highlight">85.80%</td>
+                  <td>76.64%</td>
+                  <td>67.49%</td>
+                  <td>82.10%</td>
+                  <td>79.59%</td>
+                  <td>68.19%</td>
+                  <td>67.21%</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Claude-3.7-Sonnet-Thinking</td>
+                  <td>76.38%</td>
+                  <td class="highlight">0.1459</td>
+                  <td>82.58%</td>
+                  <td>75.60%</td>
+                  <td class="highlight">70.96%</td>
+                  <td>77.08%</td>
+                  <td>82.38%</td>
+                  <td>75.48%</td>
+                  <td>69.96%</td>
+                  <td>78.52%</td>
+                  <td>78.08%</td>
+                  <td class="highlight">80.22%</td>
+                  <td>66.34%</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>InternVL-3-38B</td>
+                  <td>75.60%</td>
+                  <td>0.3553</td>
+                  <td class="highlight">91.67%</td>
+                  <td>73.19%</td>
+                  <td>61.94%</td>
+                  <td>76.24%</td>
+                  <td>82.52%</td>
+                  <td>76.75%</td>
+                  <td>65.82%</td>
+                  <td>81.66%</td>
+                  <td>78.73%</td>
+                  <td>68.14%</td>
+                  <td>70.59%</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>GPT-4.1</td>
+                  <td>75.22%</td>
+                  <td>0.3045</td>
+                  <td>89.10%</td>
+                  <td>72.60%</td>
+                  <td>63.94%</td>
+                  <td>79.28%</td>
+                  <td>83.92%</td>
+                  <td>74.93%</td>
+                  <td>68.41%</td>
+                  <td>77.99%</td>
+                  <td>77.92%</td>
+                  <td>67.87%</td>
+                  <td>67.97%</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Gemini-2.5-Pro</td>
+                  <td>75.04%</td>
+                  <td>0.3228</td>
+                  <td>89.85%</td>
+                  <td>72.19%</td>
+                  <td>63.08%</td>
+                  <td>76.50%</td>
+                  <td>83.00%</td>
+                  <td>74.93%</td>
+                  <td>65.02%</td>
+                  <td>74.56%</td>
+                  <td>76.30%</td>
+                  <td>74.82%</td>
+                  <td class="highlight">72.92%</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>InternVL-3-14B</td>
+                  <td>74.14%</td>
+                  <td>0.3532</td>
+                  <td>89.97%</td>
+                  <td>71.52%</td>
+                  <td>60.92%</td>
+                  <td>75.25%</td>
+                  <td>81.51%</td>
+                  <td>75.04%</td>
+                  <td>64.90%</td>
+                  <td>80.47%</td>
+                  <td>78.51%</td>
+                  <td>65.88%</td>
+                  <td>66.92%</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>GPT-4o</td>
+                  <td>73.79%</td>
+                  <td>0.1680</td>
+                  <td>80.07%</td>
+                  <td>74.11%</td>
+                  <td>67.18%</td>
+                  <td class="highlight">81.06%</td>
+                  <td>77.23%</td>
+                  <td>72.73%</td>
+                  <td>67.43%</td>
+                  <td>81.21%</td>
+                  <td class="highlight">81.75%</td>
+                  <td>63.40%</td>
+                  <td>60.69%</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>o4-mini</td>
+                  <td>73.45%</td>
+                  <td>0.2716</td>
+                  <td>85.68%</td>
+                  <td>70.82%</td>
+                  <td>63.86%</td>
+                  <td>77.39%</td>
+                  <td>81.32%</td>
+                  <td>70.64%</td>
+                  <td>65.95%</td>
+                  <td>78.76%</td>
+                  <td>78.67%</td>
+                  <td>69.33%</td>
+                  <td>60.86%</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>Qwen2-VL-72B</td>
+                  <td>72.77%</td>
+                  <td>0.3823</td>
+                  <td>88.59%</td>
+                  <td>71.76%</td>
+                  <td>57.96%</td>
+                  <td>77.39%</td>
+                  <td>84.93%</td>
+                  <td>74.55%</td>
+                  <td>61.88%</td>
+                  <td>78.15%</td>
+                  <td>75.70%</td>
+                  <td>61.89%</td>
+                  <td>62.26%</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Claude-3.5-Sonnet</td>
+                  <td>72.53%</td>
+                  <td>0.2879</td>
+                  <td>83.64%</td>
+                  <td>72.68%</td>
+                  <td>61.27%</td>
+                  <td>76.30%</td>
+                  <td>77.23%</td>
+                  <td>66.41%</td>
+                  <td>69.52%</td>
+                  <td>76.60%</td>
+                  <td>69.98%</td>
+                  <td>76.87%</td>
+                  <td>64.24%</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>InternVL-2.5-8B</td>
+                  <td>71.53%</td>
+                  <td>0.3498</td>
+                  <td>87.62%</td>
+                  <td>67.58%</td>
+                  <td>59.39%</td>
+                  <td>76.24%</td>
+                  <td>79.35%</td>
+                  <td>73.50%</td>
+                  <td>60.64%</td>
+                  <td>76.80%</td>
+                  <td>75.00%</td>
+                  <td>61.51%</td>
+                  <td>64.59%</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>Gemini-2.0-Flash</td>
+                  <td>71.32%</td>
+                  <td>0.3928</td>
+                  <td>90.10%</td>
+                  <td>66.11%</td>
+                  <td>57.75%</td>
+                  <td>75.09%</td>
+                  <td>79.39%</td>
+                  <td>71.47%</td>
+                  <td>62.99%</td>
+                  <td>76.84%</td>
+                  <td>73.97%</td>
+                  <td>64.85%</td>
+                  <td>61.33%</td>
+                </tr>
+                <tr>
+                  <td>15</td>
+                  <td>Qwen2.5-VL-7B</td>
+                  <td>70.22%</td>
+                  <td>0.4132</td>
+                  <td>87.40%</td>
+                  <td>68.25%</td>
+                  <td>55.00%</td>
+                  <td>73.21%</td>
+                  <td>78.86%</td>
+                  <td>72.68%</td>
+                  <td>59.59%</td>
+                  <td>73.13%</td>
+                  <td>72.89%</td>
+                  <td>62.16%</td>
+                  <td>65.52%</td>
+                </tr>
+                <tr>
+                  <td>16</td>
+                  <td>Gemini-2.0-Flash-Thinking</td>
+                  <td>70.06%</td>
+                  <td>0.3997</td>
+                  <td>88.48%</td>
+                  <td>65.39%</td>
+                  <td>56.31%</td>
+                  <td>70.91%</td>
+                  <td>78.62%</td>
+                  <td>69.98%</td>
+                  <td>56.69%</td>
+                  <td>71.42%</td>
+                  <td>69.11%</td>
+                  <td>71.27%</td>
+                  <td>69.25%</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>InternVL-3-8B</td>
+                  <td>68.82%</td>
+                  <td>0.4552</td>
+                  <td>88.71%</td>
+                  <td>64.95%</td>
+                  <td>52.78%</td>
+                  <td>73.21%</td>
+                  <td>78.72%</td>
+                  <td>72.68%</td>
+                  <td>61.81%</td>
+                  <td>76.03%</td>
+                  <td>67.55%</td>
+                  <td>57.20%</td>
+                  <td>58.12%</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>Gemma-3-12B</td>
+                  <td>68.56%</td>
+                  <td>0.3287</td>
+                  <td>80.80%</td>
+                  <td>68.46%</td>
+                  <td>56.41%</td>
+                  <td>71.74%</td>
+                  <td>75.54%</td>
+                  <td>72.68%</td>
+                  <td>60.21%</td>
+                  <td>74.19%</td>
+                  <td>65.28%</td>
+                  <td>55.69%</td>
+                  <td>69.48%</td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>Claude-3.7-Sonnet</td>
+                  <td>68.42%</td>
+                  <td>0.3375</td>
+                  <td>82.27%</td>
+                  <td>66.21%</td>
+                  <td>56.78%</td>
+                  <td>69.07%</td>
+                  <td>74.05%</td>
+                  <td>68.61%</td>
+                  <td>62.31%</td>
+                  <td>73.26%</td>
+                  <td>65.12%</td>
+                  <td>70.03%</td>
+                  <td>61.39%</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>Llama-4-Maverick</td>
+                  <td>67.74%</td>
+                  <td>0.4382</td>
+                  <td>88.28%</td>
+                  <td>61.68%</td>
+                  <td>53.24%</td>
+                  <td>72.00%</td>
+                  <td>75.25%</td>
+                  <td>68.33%</td>
+                  <td>56.26%</td>
+                  <td>72.60%</td>
+                  <td>67.12%</td>
+                  <td>66.58%</td>
+                  <td>59.06%</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>LLaVA-v1.6-vicuna-13B</td>
+                  <td>66.80%</td>
+                  <td>0.3791</td>
+                  <td>80.27%</td>
+                  <td>67.48%</td>
+                  <td>52.65%</td>
+                  <td>65.99%</td>
+                  <td>77.13%</td>
+                  <td>69.05%</td>
+                  <td>60.39%</td>
+                  <td>74.15%</td>
+                  <td>69.44%</td>
+                  <td>53.15%</td>
+                  <td>60.28%</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>InternVL-3-9B</td>
+                  <td>65.92%</td>
+                  <td>0.5171</td>
+                  <td>88.87%</td>
+                  <td>60.37%</td>
+                  <td>48.51%</td>
+                  <td>69.18%</td>
+                  <td>74.43%</td>
+                  <td>66.36%</td>
+                  <td>57.50%</td>
+                  <td>70.40%</td>
+                  <td>71.87%</td>
+                  <td>54.39%</td>
+                  <td>59.11%</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>Llama-4-Scout</td>
+                  <td>65.25%</td>
+                  <td>0.5680</td>
+                  <td>88.38%</td>
+                  <td>62.07%</td>
+                  <td>45.29%</td>
+                  <td>69.02%</td>
+                  <td>71.26%</td>
+                  <td>63.50%</td>
+                  <td>56.57%</td>
+                  <td>66.00%</td>
+                  <td>67.49%</td>
+                  <td>67.82%</td>
+                  <td>57.60%</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>LLaVA-v1.6-mistral-7B</td>
+                  <td>64.60%</td>
+                  <td>0.4824</td>
+                  <td>81.83%</td>
+                  <td>64.94%</td>
+                  <td>47.02%</td>
+                  <td>65.62%</td>
+                  <td>72.08%</td>
+                  <td>68.11%</td>
+                  <td>54.78%</td>
+                  <td>71.38%</td>
+                  <td>72.19%</td>
+                  <td>47.71%</td>
+                  <td>60.34%</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>Gemma-3-27B</td>
+                  <td>63.62%</td>
+                  <td>0.4617</td>
+                  <td>82.68%</td>
+                  <td>59.47%</td>
+                  <td>48.71%</td>
+                  <td>67.92%</td>
+                  <td>71.88%</td>
+                  <td>69.93%</td>
+                  <td>52.87%</td>
+                  <td>66.16%</td>
+                  <td>60.80%</td>
+                  <td>50.84%</td>
+                  <td>65.52%</td>
+                </tr>
+                <tr>
+                  <td>26</td>
+                  <td>Skywork-R1V-38B</td>
+                  <td>61.84%</td>
+                  <td>0.4071</td>
+                  <td>79.76%</td>
+                  <td>55.88%</td>
+                  <td>49.86%</td>
+                  <td>64.99%</td>
+                  <td>69.04%</td>
+                  <td>64.32%</td>
+                  <td>51.26%</td>
+                  <td>65.96%</td>
+                  <td>61.99%</td>
+                  <td>55.90%</td>
+                  <td>57.31%</td>
+                </tr>
+                <tr>
+                  <td>27</td>
+                  <td>Mulberry-Qwen</td>
+                  <td>60.25%</td>
+                  <td>0.4659</td>
+                  <td>78.88%</td>
+                  <td>55.74%</td>
+                  <td>46.12%</td>
+                  <td>62.32%</td>
+                  <td>68.08%</td>
+                  <td>65.70%</td>
+                  <td>57.06%</td>
+                  <td>55.81%</td>
+                  <td>63.39%</td>
+                  <td>57.04%</td>
+                  <td>52.13%</td>
+                </tr>
+                <tr>
+                  <td>28</td>
+                  <td>QVQ-72B</td>
+                  <td>57.14%</td>
+                  <td>0.6188</td>
+                  <td>82.11%</td>
+                  <td>50.59%</td>
+                  <td>38.71%</td>
+                  <td>61.43%</td>
+                  <td>69.43%</td>
+                  <td>59.70%</td>
+                  <td>50.34%</td>
+                  <td>53.12%</td>
+                  <td>57.72%</td>
+                  <td>54.07%</td>
+                  <td>49.62%</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>InternVL-2.5-4B</td>
+                  <td>56.16%</td>
+                  <td>0.6965</td>
+                  <td>87.60%</td>
+                  <td>45.26%</td>
+                  <td>35.61%</td>
+                  <td>60.86%</td>
+                  <td>66.30%</td>
+                  <td>56.51%</td>
+                  <td>50.77%</td>
+                  <td>51.57%</td>
+                  <td>61.34%</td>
+                  <td>54.02%</td>
+                  <td>46.65%</td>
+                </tr>
+                <tr>
+                  <td>30</td>
+                  <td>LlamaV-o1</td>
+                  <td>55.68%</td>
+                  <td>0.7045</td>
+                  <td>83.32%</td>
+                  <td>49.04%</td>
+                  <td>34.67%</td>
+                  <td>58.35%</td>
+                  <td>64.66%</td>
+                  <td>60.86%</td>
+                  <td>47.87%</td>
+                  <td>60.42%</td>
+                  <td>51.40%</td>
+                  <td>46.04%</td>
+                  <td>52.01%</td>
+                </tr>
+                <tr>
+                  <td>31</td>
+                  <td>Qwen2-VL-2B-GRPO-8k</td>
+                  <td>55.39%</td>
+                  <td>0.6084</td>
+                  <td>81.89%</td>
+                  <td>46.08%</td>
+                  <td>38.20%</td>
+                  <td>59.50%</td>
+                  <td>57.63%</td>
+                  <td>56.29%</td>
+                  <td>50.03%</td>
+                  <td>57.52%</td>
+                  <td>58.21%</td>
+                  <td>51.48%</td>
+                  <td>50.38%</td>
+                </tr>
+                <tr>
+                  <td>32</td>
+                  <td>Llama-3.2-CoT</td>
+                  <td>55.15%</td>
+                  <td>0.6964</td>
+                  <td>83.60%</td>
+                  <td>46.98%</td>
+                  <td>34.84%</td>
+                  <td>58.45%</td>
+                  <td>65.53%</td>
+                  <td>57.12%</td>
+                  <td>48.61%</td>
+                  <td>58.09%</td>
+                  <td>51.40%</td>
+                  <td>51.91%</td>
+                  <td>46.30%</td>
+                </tr>
+                <tr>
+                  <td>33</td>
+                  <td>Qwen2.5-VL-3B</td>
+                  <td>54.47%</td>
+                  <td>0.7767</td>
+                  <td>83.11%</td>
+                  <td>49.22%</td>
+                  <td>31.06%</td>
+                  <td>59.50%</td>
+                  <td>67.02%</td>
+                  <td>54.48%</td>
+                  <td>50.40%</td>
+                  <td>47.74%</td>
+                  <td>54.54%</td>
+                  <td>49.97%</td>
+                  <td>51.89%</td>
+                </tr>
+                <tr>
+                  <td>34</td>
+                  <td>Qwen2-VL-7B</td>
+                  <td>53.95%</td>
+                  <td>0.5808</td>
+                  <td>70.98%</td>
+                  <td>55.49%</td>
+                  <td>35.37%</td>
+                  <td>60.02%</td>
+                  <td>66.35%</td>
+                  <td>53.82%</td>
+                  <td>45.28%</td>
+                  <td>55.24%</td>
+                  <td>52.43%</td>
+                  <td>44.37%</td>
+                  <td>50.67%</td>
+                </tr>
+                <tr>
+                  <td>35</td>
+                  <td>LLaVA-v1.6-vicuna-7B</td>
+                  <td>53.45%</td>
+                  <td>0.6641</td>
+                  <td>80.27%</td>
+                  <td>45.16%</td>
+                  <td>34.92%</td>
+                  <td>56.78%</td>
+                  <td>65.29%</td>
+                  <td>56.84%</td>
+                  <td>50.52%</td>
+                  <td>52.87%</td>
+                  <td>54.32%</td>
+                  <td>43.67%</td>
+                  <td>45.08%</td>
+                </tr>
+                <tr>
+                  <td>36</td>
+                  <td>Llama-3.2-Vision</td>
+                  <td>53.30%</td>
+                  <td>0.7970</td>
+                  <td>83.82%</td>
+                  <td>43.17%</td>
+                  <td>29.70%</td>
+                  <td>51.90%</td>
+                  <td>63.76%</td>
+                  <td>51.51%</td>
+                  <td>49.26%</td>
+                  <td>57.91%</td>
+                  <td>53.87%</td>
+                  <td>47.47%</td>
+                  <td>46.95%</td>
+                </tr>
+                <tr>
+                  <td>37</td>
+                  <td>InternVL-3-2B</td>
+                  <td>53.00%</td>
+                  <td>0.7885</td>
+                  <td>86.44%</td>
+                  <td>42.06%</td>
+                  <td>30.49%</td>
+                  <td>58.77%</td>
+                  <td>63.70%</td>
+                  <td>53.11%</td>
+                  <td>48.30%</td>
+                  <td>47.57%</td>
+                  <td>55.67%</td>
+                  <td>50.08%</td>
+                  <td>46.01%</td>
+                </tr>
+                <tr>
+                  <td>38</td>
+                  <td>Qwen2-VL-2B</td>
+                  <td>52.82%</td>
+                  <td>0.6367</td>
+                  <td>78.99%</td>
+                  <td>43.98%</td>
+                  <td>35.47%</td>
+                  <td>55.78%</td>
+                  <td>57.87%</td>
+                  <td>53.49%</td>
+                  <td>48.92%</td>
+                  <td>55.77%</td>
+                  <td>53.40%</td>
+                  <td>45.71%</td>
+                  <td>49.21%</td>
+                </tr>
+                <tr>
+                  <td>39</td>
+                  <td>LLaVA-1.5</td>
+                  <td>51.92%</td>
+                  <td>0.5647</td>
+                  <td>75.72%</td>
+                  <td>42.79%</td>
+                  <td>37.24%</td>
+                  <td>59.92%</td>
+                  <td>62.49%</td>
+                  <td>55.03%</td>
+                  <td>50.22%</td>
+                  <td>52.87%</td>
+                  <td>52.43%</td>
+                  <td>37.90%</td>
+                  <td>41.76%</td>
+                </tr>
+                <tr>
+                  <td>40</td>
+                  <td>Kimi-VL-A3B-Instruct</td>
+                  <td>50.23%</td>
+                  <td>0.6888</td>
+                  <td>77.61%</td>
+                  <td>40.98%</td>
+                  <td>32.09%</td>
+                  <td>22.40%</td>
+                  <td>27.92%</td>
+                  <td>27.21%</td>
+                  <td>22.89%</td>
+                  <td>22.38%</td>
+                  <td>16.41%</td>
+                  <td>22.48%</td>
+                  <td>20.27%</td>
+                </tr>
+                <tr>
+                  <td>41</td>
+                  <td>Gemma-3-4B</td>
+                  <td>48.80%</td>
+                  <td>0.7148</td>
+                  <td>72.78%</td>
+                  <td>43.69%</td>
+                  <td>29.92%</td>
+                  <td>53.69%</td>
+                  <td>58.26%</td>
+                  <td>51.29%</td>
+                  <td>43.18%</td>
+                  <td>50.10%</td>
+                  <td>47.68%</td>
+                  <td>39.08%</td>
+                  <td>44.44%</td>
+                </tr>
+                <tr>
+                  <td>42</td>
+                  <td>InternVL-2.5-2B</td>
+                  <td>46.69%</td>
+                  <td>0.9077</td>
+                  <td>84.30%</td>
+                  <td>32.71%</td>
+                  <td>23.04%</td>
+                  <td>50.60%</td>
+                  <td>58.06%</td>
+                  <td>46.29%</td>
+                  <td>45.40%</td>
+                  <td>41.79%</td>
+                  <td>46.27%</td>
+                  <td>44.80%</td>
+                  <td>39.72%</td>
+                </tr>
+                <tr>
+                  <td>43</td>
+                  <td>Mulberry-Llama</td>
+                  <td>46.59%</td>
+                  <td>0.3669</td>
+                  <td>55.77%</td>
+                  <td>46.84%</td>
+                  <td>37.16%</td>
+                  <td>51.65%</td>
+                  <td>53.92%</td>
+                  <td>51.07%</td>
+                  <td>46.14%</td>
+                  <td>41.95%</td>
+                  <td>49.14%</td>
+                  <td>43.61%</td>
+                  <td>34.89%</td>
+                </tr>
+                <tr>
+                  <td>44</td>
+                  <td>InternVL-3-1B</td>
+                  <td>43.79%</td>
+                  <td>0.9901</td>
+                  <td>82.13%</td>
+                  <td>29.91%</td>
+                  <td>19.31%</td>
+                  <td>49.03%</td>
+                  <td>54.98%</td>
+                  <td>44.04%</td>
+                  <td>44.23%</td>
+                  <td>36.81%</td>
+                  <td>39.90%</td>
+                  <td>41.56%</td>
+                  <td>40.30%</td>
+                </tr>
+                <tr>
+                  <td>45</td>
+                  <td>InternVL-2.5-1B</td>
+                  <td>39.84%</td>
+                  <td>1.0777</td>
+                  <td>81.25%</td>
+                  <td>23.40%</td>
+                  <td>14.84%</td>
+                  <td>45.11%</td>
+                  <td>50.89%</td>
+                  <td>36.72%</td>
+                  <td>40.59%</td>
+                  <td>34.57%</td>
+                  <td>34.13%</td>
+                  <td>40.59%</td>
+                  <td>36.05%</td>
+                </tr>
+                <tr>
+                  <td>46</td>
+                  <td>Kimi-VL-A3B-Thinking</td>
+                  <td>38.00%</td>
+                  <td>1.0908</td>
+                  <td>72.32%</td>
+                  <td>27.19%</td>
+                  <td>14.50%</td>
+                  <td>19.94%</td>
+                  <td>21.38%</td>
+                  <td>18.86%</td>
+                  <td>18.08%</td>
+                  <td>20.22%</td>
+                  <td>15.17%</td>
+                  <td>17.04%</td>
+                  <td>17.47%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="leaderboard-note">* The results might be slightly different from the paper due to re-evaluation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="static/js/main.js"></script>
+</body>
+</html>
