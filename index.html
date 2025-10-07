@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" name="description" />
-  <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" property="og:title" />
+  <meta content="When Slower Isn’t Truer: Inverse Scaling Law of Truthfulness in Multimodal Reasoning" property="og:title" />
   <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" property="og:description" />
   <meta content="https://truthfulvqa.github.io/static/images/open_graph.png" property="og:image" />
-  <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" property="twitter:title" />
+  <meta content="When Slower Isn’t Truer: Inverse Scaling Law of Truthfulness in Multimodal Reasoning" property="twitter:title" />
   <meta content="TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering" property="twitter:description" />
   <meta content="https://truthfulvqa.github.io/static/images/open_graph.png" property="twitter:image" />
   <meta property="og:type" content="website" />
@@ -20,7 +20,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="static/images/apple-touch-icon.png">
 
-  <title>TruthfulVQA: A Benchmark for Evaluating Truthfulness in Visual Question Answering</title>
+  <title>When Slower Isn’t Truer: Inverse Scaling Law of Truthfulness in Multimodal Reasoning</title>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9Z7HCWJNBC"></script>
@@ -152,6 +152,11 @@
       font-weight: 600;
       color: #2e7d32;
     }
+    /* Hide CAI column (4th column) in leaderboard */
+    .leaderboard-table th:nth-child(4),
+    .leaderboard-table td:nth-child(4) {
+      display: none;
+    }
     .leaderboard-table tr:nth-child(1) td.highlight {
       background-color: #c8e6c9;
       color: #1b5e20;
@@ -223,7 +228,6 @@
     }
     .paragraph p:has(b) {
       margin-top: 2.5rem;
-      font-size: 1.2rem;
     }
     .paragraph ul {
       margin-left: 2rem;
@@ -349,7 +353,7 @@
     <div class="container">
       <div class="title-section">
         <div class="title-row">
-          <h1 class="title">The Mirage of Multimodality:<br>Where Truth is Tested and Honesty Unravels</h1>
+          <h1 class="title">When Slower Isn’t Truer:<br>Inverse Scaling Law of Truthfulness in Multimodal Reasoning</h1>
         </div>
         <div class="row">
           <div class="author-col">
@@ -380,21 +384,34 @@
         <h2 class="section-header" id="overview">Overview</h2>
         <div class="paragraph">
           <p>
-            Reasoning models have recently attracted significant attention, especially for tasks that involve complex inference. Their strengths exemplify the <i>System II</i> paradigm (slow, structured thinking), contrasting with the <i>System I</i> (rapid, heuristic-driven). Yet, <i><b>does slower reasoning necessarily lead to greater truthfulness?</b></i>
-            Our findings suggest otherwise. In this study, we present the first systematic investigation of distortions associated with System I and System II reasoning in multimodal contexts. We demonstrate that slower reasoning models, when presented with incomplete or misleading visual inputs, are more likely to fabricate plausible yet false details to support flawed reasoning -- a phenomenon we term the <b>Mirage of Multimodality</b>. To examine this, we constructed a 5,000-sample hierarchical prompt dataset annotated by over 60 human participants. These prompts gradually increase in complexity, revealing a consistent pattern: slower reasoning models tend to employ <b>depth-first thinking</b> (delving deeper into incorrect premises), whereas faster chat models favor <b>breadth-first inference</b>, exhibiting greater caution under uncertainty. Our results highlight a critical vulnerability of slower reasoning models: although highly effective in structured domains such as mathematics, it becomes brittle when confronted with ambiguous multimodal inputs.
+            Reasoning models have attracted increasing attention for their ability to tackle complex tasks, embodying the <i>System II</i> (slow thinking) paradigm in contrast to <i>System I</i> (fast, intuitive responses). Yet a key question remains: <i><b>Does slower reasoning necessarily lead to more truthful answers?</b></i>
+          </p>
+          <p>
+            Our findings suggest otherwise. We conduct the first systematic study of the inverse scaling law in slow-thinking paradigms for multimodal reasoning. We find that when confronted with incomplete or misleading visual inputs, slow-thinking models are more prone to fabricating plausible yet false details to justify dishonest reasoning.
+          </p>
+          <p>
+            To analyze this behavior, we construct a 5,000-sample hierarchical prompt dataset annotated by 50 human participants. The prompts progressively increase in complexity, revealing a consistent pattern: slower reasoning models tend to follow <b>depth-first search (DFS)</b> thinking, persistently exploring flawed premises, while faster chat models favor <b>breadth-first search (BFS)</b> inference, showing greater caution under uncertainty.
+          </p>
+          <p>
+            These findings reveal a critical vulnerability of reasoning models: while effective in structured domains such as math, their DFS-style reasoning becomes fragile when confronted with ambiguous, multimodal inputs.
           </p>
           <p><b>Contributions:</b></p>
           <ul>
-            <li> <b>First and foremost, human-in-the-loop: </b> We introduce TruthfulVQA, the first large-scale multimodal truthfulness benchmark built with rigorous human-in-the-loop verification. Over 5k visually misleading images were collected and annotated by 50 professional annotators, and, critically, each sample was independently reviewed by five professional annotators on a case-by-case basis, ensuring evaluation robustness beyond automated metrics.
+            <li>
+              <b>First and foremost, human-in-the-loop.</b>
+              We introduce <b>TruthfulVQA</b>, the first large-scale multimodal truthfulness benchmark built with rigorous human-in-the-loop verification. Over 5k visually misleading images were collected and annotated by 50 professional annotators, and, critically, each sample was independently reviewed by five professional annotators on a case-by-case basis, ensuring evaluation robustness beyond automated metrics.
             </li>
             <li>
-                <b>Hierarchical prompt design for deep truthfulness evaluation: </b> We propose a three-tier human-written prompt that systematically probes models across increasing levels of reasoning complexity, enabling finer-grained diagnosis of hallucination and misinformation vulnerabilities in MLLMs.
+              <b>Hierarchical prompt design for deep truthfulness evaluation.</b>
+              We propose a three-tier human-written prompt that systematically probes models across increasing levels of reasoning complexity, enabling finer-grained diagnosis of hallucination and misinformation vulnerabilities in MLLMs.
             </li>
             <li>
-                <b>Revealing slow <i>vs.</i> fast thinking pitfalls in multimodal reasoning: </b> We conduct the first comprehensive analysis comparing depth-first (slow thinking) reasoning models and breadth-first (fast thinking) chat models under adversarial visual conditions. Our findings show that reasoning models, despite their strengths in math and code, are significantly more prone to factual hallucinations in complex visual tasks.
+              <b>Revealing slow <i>vs.</i> fast thinking pitfalls in multimodal reasoning.</b>
+              We conduct the first comprehensive analysis comparing depth-first (slow thinking) reasoning models and breadth-first (fast thinking) chat models under adversarial visual conditions. Our findings show that reasoning models, despite their strengths in math and code, are significantly more prone to factual hallucinations in complex visual tasks, as evidenced by Figure <span class="fig-ref">1</span>.
             </li>
             <li>
-                <b>TruthfulJudge: Reliable Human-Centric Evaluation Pipeline: </b> We design TruthfulJudge, a reliable evaluation pipeline to mitigate the pitfalls of AI-as-judge setups. Our methodology emphasizes in-depth human involvement to prevent feedback loops of hallucinated errors, ensuring faithful assessment of multimodal model truthfulness. Our specialised judge model, TruthfulJudge, is well-calibrated (ECE=0.11), self-consistent, and highly inter-annotator agreed (Cohen's &kappa; = 0.79), achieving 88.4% judge accuracy.
+              <b>TruthfulJudge — Reliable Human-Centric Evaluation Pipeline.</b>
+              We design TruthfulJudge, a reliable evaluation pipeline to mitigate the pitfalls of AI-as-judge setups. Our methodology emphasizes in-depth human involvement to prevent feedback loops of hallucinated errors, ensuring faithful assessment of multimodal model truthfulness. Our specialised judge model, TruthfulJudge, is well-calibrated (ECE=0.12), self-consistent, and highly inter-annotator agreed (Cohen’s &kappa; = 0.79), achieving 88.4% judge accuracy.
             </li>
           </ul>
         </div>
@@ -1072,6 +1089,23 @@
                 </tr>
                 <tr>
                   <td>33</td>
+                  <td>Kimi-VL-A3B-Instruct</td>
+                  <td>54.71%</td>
+                  <td>0.6888</td>
+                  <td>78.46%</td>
+                  <td>47.73%</td>
+                  <td>37.92%</td>
+                  <td>61.17%</td>
+                  <td>64.61%</td>
+                  <td>48.38%</td>
+                  <td>47.93%</td>
+                  <td>51.28%</td>
+                  <td>64.09%</td>
+                  <td>58.44%</td>
+                  <td>39.37%</td>
+                </tr>
+                <tr>
+                  <td>34</td>
                   <td>Qwen2.5-VL-3B</td>
                   <td>54.47%</td>
                   <td>0.7767</td>
@@ -1088,7 +1122,7 @@
                   <td>51.89%</td>
                 </tr>
                 <tr>
-                  <td>34</td>
+                  <td>35</td>
                   <td>Qwen2-VL-7B</td>
                   <td>53.95%</td>
                   <td>0.5808</td>
@@ -1105,7 +1139,7 @@
                   <td>50.67%</td>
                 </tr>
                 <tr>
-                  <td>35</td>
+                  <td>36</td>
                   <td>LLaVA-v1.6-vicuna-7B</td>
                   <td>53.45%</td>
                   <td>0.6641</td>
@@ -1122,7 +1156,7 @@
                   <td>45.08%</td>
                 </tr>
                 <tr>
-                  <td>36</td>
+                  <td>37</td>
                   <td>Llama-3.2-Vision</td>
                   <td>53.30%</td>
                   <td>0.7970</td>
@@ -1139,7 +1173,7 @@
                   <td>46.95%</td>
                 </tr>
                 <tr>
-                  <td>37</td>
+                  <td>38</td>
                   <td>InternVL-3-2B</td>
                   <td>53.00%</td>
                   <td>0.7885</td>
@@ -1156,7 +1190,7 @@
                   <td>46.01%</td>
                 </tr>
                 <tr>
-                  <td>38</td>
+                  <td>39</td>
                   <td>Qwen2-VL-2B</td>
                   <td>52.82%</td>
                   <td>0.6367</td>
@@ -1173,7 +1207,7 @@
                   <td>49.21%</td>
                 </tr>
                 <tr>
-                  <td>39</td>
+                  <td>40</td>
                   <td>LLaVA-1.5</td>
                   <td>51.92%</td>
                   <td>0.5647</td>
@@ -1190,24 +1224,24 @@
                   <td>41.76%</td>
                 </tr>
                 <tr>
-                  <td>40</td>
-                  <td>Kimi-VL-A3B-Instruct</td>
-                  <td>50.23%</td>
-                  <td>0.6888</td>
-                  <td>77.61%</td>
-                  <td>40.98%</td>
-                  <td>32.09%</td>
-                  <td>22.40%</td>
-                  <td>27.92%</td>
-                  <td>27.21%</td>
-                  <td>22.89%</td>
-                  <td>22.38%</td>
-                  <td>16.41%</td>
-                  <td>22.48%</td>
-                  <td>20.27%</td>
+                  <td>41</td>
+                  <td>Kimi-VL-A3B-Thinking</td>
+                  <td>50.45%</td>
+                  <td>1.0908</td>
+                  <td>72.62%</td>
+                  <td>41.92%</td>
+                  <td>36.78%</td>
+                  <td>56.57%</td>
+                  <td>56.62%</td>
+                  <td>48.32%</td>
+                  <td>43.00%</td>
+                  <td>42.11%</td>
+                  <td>58.10%</td>
+                  <td>60.49%</td>
+                  <td>38.26%</td>
                 </tr>
                 <tr>
-                  <td>41</td>
+                  <td>42</td>
                   <td>Gemma-3-4B</td>
                   <td>48.80%</td>
                   <td>0.7148</td>
@@ -1224,7 +1258,7 @@
                   <td>44.44%</td>
                 </tr>
                 <tr>
-                  <td>42</td>
+                  <td>43</td>
                   <td>InternVL-2.5-2B</td>
                   <td>46.69%</td>
                   <td>0.9077</td>
@@ -1241,7 +1275,7 @@
                   <td>39.72%</td>
                 </tr>
                 <tr>
-                  <td>43</td>
+                  <td>44</td>
                   <td>Mulberry-Llama</td>
                   <td>46.59%</td>
                   <td>0.3669</td>
@@ -1258,7 +1292,7 @@
                   <td>34.89%</td>
                 </tr>
                 <tr>
-                  <td>44</td>
+                  <td>45</td>
                   <td>InternVL-3-1B</td>
                   <td>43.79%</td>
                   <td>0.9901</td>
@@ -1275,7 +1309,7 @@
                   <td>40.30%</td>
                 </tr>
                 <tr>
-                  <td>45</td>
+                  <td>46</td>
                   <td>InternVL-2.5-1B</td>
                   <td>39.84%</td>
                   <td>1.0777</td>
@@ -1290,23 +1324,6 @@
                   <td>34.13%</td>
                   <td>40.59%</td>
                   <td>36.05%</td>
-                </tr>
-                <tr>
-                  <td>46</td>
-                  <td>Kimi-VL-A3B-Thinking</td>
-                  <td>38.00%</td>
-                  <td>1.0908</td>
-                  <td>72.32%</td>
-                  <td>27.19%</td>
-                  <td>14.50%</td>
-                  <td>19.94%</td>
-                  <td>21.38%</td>
-                  <td>18.86%</td>
-                  <td>18.08%</td>
-                  <td>20.22%</td>
-                  <td>15.17%</td>
-                  <td>17.04%</td>
-                  <td>17.47%</td>
                 </tr>
               </tbody>
             </table>
